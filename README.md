@@ -1,3 +1,7 @@
+[![Open the bilingual portfolio](https://img.shields.io/badge/Portfolio-Open%20website-0d5f75?style=for-the-badge)](https://imedlcd-lang.github.io/Dr-Imed-BEN-SLIMENE/)
+
+> 🇫🇷 Une version bilingue (français/anglais), adaptée aux mobiles, est disponible dans [index.html](./index.html). Activez GitHub Pages pour la publier.
+
 
 # 🌍 Dr. Imed Ben Slimene  
 **PhD in Applied Geology | Hydrogeologist | GIS & Remote Sensing Specialist**
