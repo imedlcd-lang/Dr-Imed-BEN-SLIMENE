@@ -811,8 +811,6 @@ outline-offset:2px;
   <div class="wrap">
     <div class="eyebrow" data-en>Gallery</div>
     <div class="eyebrow" data-fr>Galerie</div>
-    <h2 class="title" data-en>Selected images</h2>
-    <h2 class="title" data-fr>Images sélectionnées</h2>
     <div class="gallery-grid">
       <a class="gallery-item" href="assets/gallery/AFFICHE_page-0001.jpg"><img src="assets/gallery/AFFICHE_page-0001.jpg" alt="AFFICHE_page-0001.jpg"></a>
       <a class="gallery-item" href="assets/gallery/Poster-CPG-2_page-0001.jpg"><img src="assets/gallery/Poster-CPG-2_page-0001.jpg" alt="Poster-CPG-2_page-0001.jpg"></a>
@@ -986,10 +984,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 <script>
 (function(){
-  const galleryLinks = Array.from(document.querySelectorAll('.gallery-item'));
-  if(!galleryLinks.length) return;
-  const images = galleryLinks.map(a => a.getAttribute('href'));
-  const captions = galleryLinks.map(a => (a.querySelector('img') && a.querySelector('img').alt) || a.getAttribute('href'));
+  const allGalleryLinks = Array.from(document.querySelectorAll('.gallery-item'));
+  if(!allGalleryLinks.length) return;
+  const imageRegex = /\.(jpe?g|png|gif|webp|bmp|svg|jpeg)$/i;
+  const imageLinks = allGalleryLinks.filter(a => imageRegex.test(a.getAttribute('href')));
+  const otherLinks = allGalleryLinks.filter(a => !imageRegex.test(a.getAttribute('href')));
+  // open non-image files (PDFs, docs) in a new tab
+  otherLinks.forEach(a => { a.setAttribute('target','_blank'); a.setAttribute('rel','noopener'); });
+  const images = imageLinks.map(a => a.getAttribute('href'));
+  const captions = imageLinks.map(a => (a.querySelector('img') && a.querySelector('img').alt) || a.getAttribute('href'));
   const lightbox = document.getElementById('lightbox');
   const lbImg = lightbox.querySelector('img');
   const lbCaption = lightbox.querySelector('.caption');
@@ -1017,7 +1020,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   function next(){ open((idx+1) % images.length); }
   function prev(){ open((idx-1+images.length) % images.length); }
 
-  galleryLinks.forEach((a,i)=>{
+  imageLinks.forEach((a,i)=>{
     a.addEventListener('click', function(e){
       e.preventDefault();
       open(i);
