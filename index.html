@@ -132,10 +132,11 @@ box-shadow: 0 8px 24px rgba(0,0,0,.3);
   border-radius:16px;
   overflow:hidden;
   box-shadow:0 20px 50px rgba(0,0,0,.45);
-  max-width:380px;
+  max-width:360px;
   margin-top:30px;
 }
-n.profile-photo-wrapper .profile-hero{
+
+.profile-photo-wrapper .profile-hero{
   width:100%;
   height:auto;
   display:block;
@@ -143,19 +144,19 @@ box-shadow: 0 8px 24px rgba(0,0,0,.3);
   vertical-align:middle;
 }
 
-/* caption overlaid at bottom of hero image */
+/* caption overlaid at bottom-left of hero image */
 .photo-caption{
   position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:12px 16px;
-  background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.55));
+  left:14px;
+  bottom:12px;
+  padding:8px 12px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.55));
   color:white;
   font-weight:700;
-  text-align:center;
-  font-size:1rem;
+  text-align:left;
+  font-size:0.95rem;
   backdrop-filter: blur(4px);
+  border-radius:6px;
 }
  
 .links{
@@ -671,8 +672,8 @@ outline-offset:2px;
 <nav class="nav">
 <div class="brand">
 <div class="profile-photo-wrapper">
-  <img class="profile-hero" src="assets/imed-ben-slimene-2.png" alt="Imed Ben Slimene">
-  <div class="photo-caption">Dr Imed Ben Slimene</div>
+  <img class="profile-hero" src="assets/imed-hero.png" alt="Dr Imed BEN SLIMENE" width="360" height="360" loading="eager" decoding="async">
+  <div class="photo-caption">Dr Imed BEN SLIMENE</div>
 </div>
 <div>
 <span style="font-size: 1rem; display:block;">DR. IMED</span>
@@ -813,18 +814,23 @@ outline-offset:2px;
     <h2 class="title" data-en>Selected images</h2>
     <h2 class="title" data-fr>Images sélectionnées</h2>
     <div class="gallery-grid">
-      <a class="gallery-item" href="assets/gallery/20231015_075131 (1) (2) (1).png"><img src="assets/gallery/20231015_075131 (1) (2) (1).png" alt="Image 1"><div class="sr-only">20231015_075131</div></a>
-      <a class="gallery-item" href="assets/gallery/20231015_075131 (1) (2).png"><img src="assets/gallery/20231015_075131 (1) (2).png" alt="Image 2"></a>
-      <a class="gallery-item" href="assets/gallery/20231015_075131 (1).png"><img src="assets/gallery/20231015_075131 (1).png" alt="Image 3"></a>
-      <a class="gallery-item" href="assets/gallery/20231015_075131.png"><img src="assets/gallery/20231015_075131.png" alt="Image 4"></a>
-      <a class="gallery-item" href="assets/gallery/Image1.png"><img src="assets/gallery/Image1.png" alt="Image 5"></a>
-      <a class="gallery-item" href="assets/gallery/reflechit.jpg"><img src="assets/gallery/reflechit.jpg" alt="Image 6"></a>
-      <a class="gallery-item" href="assets/gallery/Attestation vaccation ISSTE_page-0001.jpg"><img src="assets/gallery/Attestation vaccation ISSTE_page-0001.jpg" alt="Image 7"></a>
-      <a class="gallery-item" href="assets/gallery/TOPCON-GPS.png"><img src="assets/gallery/TOPCON-GPS.png" alt="Image 8"></a>
-      <a class="gallery-item" href="assets/gallery/SupportedScanner_image_1.png"><img src="assets/gallery/SupportedScanner_image_1.png" alt="Image 9"></a>
-      <a class="gallery-item" href="assets/gallery/Leica_ScanStation_P30_P40_pic_800x428.JPG"><img src="assets/gallery/Leica_ScanStation_P30_P40_pic_800x428.JPG" alt="Image 10"></a>
-      <a class="gallery-item" href="assets/gallery/AFFICHE_page-0001.jpg"><img src="assets/gallery/AFFICHE_page-0001.jpg" alt="Image 11"></a>
-      <a class="gallery-item" href="assets/gallery/Gis.jpg"><img src="assets/gallery/Gis.jpg" alt="Image 12"></a>
+      <a class="gallery-item" href="assets/gallery/AFFICHE_page-0001.jpg"><img src="assets/gallery/AFFICHE_page-0001.jpg" alt="AFFICHE_page-0001.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Poster-CPG-2_page-0001.jpg"><img src="assets/gallery/Poster-CPG-2_page-0001.jpg" alt="Poster-CPG-2_page-0001.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Layout.jpg"><img src="assets/gallery/Layout.jpg" alt="Layout.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Fig.8_2.jpg"><img src="assets/gallery/Fig.8_2.jpg" alt="Fig.8_2.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Agrégation_spatiale2.jpg"><img src="assets/gallery/Agrégation_spatiale2.jpg" alt="Agrégation_spatiale2.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/USSL.jpg"><img src="assets/gallery/USSL.jpg" alt="USSL.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/TDS_TH.jpg"><img src="assets/gallery/TDS_TH.jpg" alt="TDS_TH.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Piper_EH_II_Draw2.jpg"><img src="assets/gallery/Piper_EH_II_Draw2.jpg" alt="Piper_EH_II_Draw2.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Agrégation_spatiale.jpg"><img src="assets/gallery/Agrégation_spatiale.jpg" alt="Agrégation_spatiale.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Modélisation IWQIs.jpg"><img src="assets/gallery/Modélisation IWQIs.jpg" alt="Modélisation IWQIs.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Coupe.jpg"><img src="assets/gallery/Coupe.jpg" alt="Coupe.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Fig.1.jpg"><img src="assets/gallery/Fig.1.jpg" alt="Fig.1.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Fig 15.jpeg"><img src="assets/gallery/Fig 15.jpeg" alt="Fig 15.jpeg"></a>
+      <a class="gallery-item" href="assets/gallery/Fig 12.jpg"><img src="assets/gallery/Fig 12.jpg" alt="Fig 12.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Fig 11.jpg"><img src="assets/gallery/Fig 11.jpg" alt="Fig 11.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/Fig 8.jpg"><img src="assets/gallery/Fig 8.jpg" alt="Fig 8.jpg"></a>
+      <a class="gallery-item" href="assets/gallery/2.jpg"><img src="assets/gallery/2.jpg" alt="2.jpg"></a>
     </div>
   </div>
 </section>
@@ -971,3 +977,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 </body>
 </html>
+
+
