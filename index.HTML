@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Dr. Imed Ben Slimene - Hydrogeologist, GIS and Remote Sensing specialist. Research in groundwater, hydrogeochemistry, machine learning and geospatial intelligence.">
+<meta name="keywords" content="Hydrogeology, GIS, Remote Sensing, Machine Learning, Groundwater, Tunisia">
+<meta name="author" content="Dr. Imed Ben Slimene">
+<title>Dr. Imed Ben Slimene | Hydrogeologist & Geospatial Scientist</title>
+<style>
+/* ===========================
+   GLOBAL RESET & VARIABLES
+=========================== */
+:root{
+--ink:#071d2b;
+--ocean:#0d5f75;
+--aqua:#26b8b1;
+--sand:#f4ecdc;
+--paper:#fbfcfa;
+--gold:#e9b75d;
+--muted:#5b6b73;
+--light-muted:#8a959e;
+}
+
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+line-height:1.65;
+color:var(--ink);
+background:var(--paper);
+}
+
+/* ===========================
+   TYPOGRAPHY SCALE
+=========================== */
+h1{ font-size:clamp(2.5rem, 5vw, 4.5rem); line-height:1.1; font-weight:800; margin:0 0 1rem 0; }
+h2{ font-size:clamp(2rem, 4vw, 3.5rem); line-height:1.15; font-weight:700; margin:0 0 1rem 0; }
+h3{ font-size:clamp(1.3rem, 2.5vw, 2rem); line-height:1.2; font-weight:700; margin:0 0 0.75rem 0; }
+p{ margin:0 0 1rem 0; font-size:1rem; }
+
+/* ===========================
+   CONTAINER & SPACING
+=========================== */
+.wrap{
+max-width:1150px;
+margin:0 auto;
+padding:0 30px;
+}
+
+@media(max-width:768px){
+.wrap{
+padding:0 20px;
+}
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+.hero{
+min-height:100vh;
+color:white;
+position:relative;
+overflow:hidden;
+background: radial-gradient(circle at 80% 20%, rgba(38,184,177,.45), transparent 25%), 
+            linear-gradient(135deg, #061927, #116b74);
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:60px 0;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:-20%;
+background: repeating-radial-gradient(
+  ellipse at center,
+  transparent 0 40px,
+  rgba(255,255,255,.08) 42px 44px
+);
+opacity:.3;
+transform:rotate(-15deg);
+pointer-events:none;
+}
+
+/* ===========================
+   NAVIGATION
+=========================== */
+.nav{
+position:relative;
+z-index:10;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+padding-top:30px;
+flex-wrap:wrap;
+}
+
+.brand{
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+font-size:1.2rem;
+font-weight:800;
+letter-spacing:.05em;
+}
+
+.profile-pic{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid rgba(255,255,255,.9);
+box-shadow: 0 8px 24px rgba(0,0,0,.3);
+margin-bottom:12px;
+}
+
+.links{
+display:flex;
+gap:20px;
+align-items:center;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.links a{
+color:white;
+text-decoration:none;
+font-weight:600;
+font-size:0.95rem;
+transition:color 0.3s ease;
+}
+
+.links a:hover{
+color:var(--gold);
+}
+
+.lang{
+border:1.5px solid rgba(255,255,255,.7);
+background:rgba(255,255,255,.1);
+color:white;
+padding:8px 16px;
+border-radius:30px;
+cursor:pointer;
+font-weight:700;
+font-size:0.9rem;
+transition:all 0.3s ease;
+}
+
+.lang:hover{
+background:rgba(255,255,255,.2);
+color:var(--gold);
+}
+
+/* ===========================
+   INTRO SECTION (in hero)
+=========================== */
+.intro{
+position:relative;
+z-index:5;
+max-width:800px;
+}
+
+.kicker{
+text-transform:uppercase;
+letter-spacing:.15em;
+font-size:0.8rem;
+color:#a4eee7;
+font-weight:800;
+margin:0 0 1.5rem 0;
+}
+
+.intro h1{
+font-size:clamp(2.5rem, 6vw, 5rem);
+line-height:1.05;
+margin:20px 0 30px 0;
+}
+
+.intro p{
+font-size:1.15rem;
+color:#dceff2;
+margin:0 0 1.5rem 0;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.cta{
+margin-top:30px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.button{
+padding:13px 28px;
+border-radius:8px;
+text-decoration:none;
+font-weight:700;
+display:inline-block;
+font-size:0.95rem;
+transition:all 0.3s ease;
+border:none;
+cursor:pointer;
+}
+
+.primary{
+background:var(--gold);
+color:var(--ink);
+}
+
+.primary:hover{
+background:#f5d876;
+transform:translateY(-2px);
+box-shadow:0 8px 24px rgba(233, 183, 93, 0.3);
+}
+
+.secondary{
+border:2px solid white;
+color:white;
+background:transparent;
+}
+
+.secondary:hover{
+background:rgba(255,255,255,.1);
+color:var(--gold);
+border-color:var(--gold);
+}
+
+/* ===========================
+   MAIN SECTIONS - GENERAL
+=========================== */
+section{
+padding:80px 0;
+}
+
+@media(max-width:768px){
+section{
+padding:60px 0;
+}
+}
+
+/* ===========================
+   EYEBROW & TITLE
+=========================== */
+.eyebrow{
+text-transform:uppercase;
+letter-spacing:.12em;
+font-size:0.75rem;
+color:var(--aqua);
+font-weight:800;
+margin:0 0 1rem 0;
+}
+
+.title{
+font-size:clamp(2rem, 4vw, 3.5rem);
+line-height:1.15;
+font-weight:700;
+color:var(--ink);
+margin:0 0 2rem 0;
+}
+
+.lead{
+font-size:1.1rem;
+line-height:1.8;
+color:var(--muted);
+margin:0 0 2rem 0;
+max-width:800px;
+}
+
+/* ===========================
+   PROFILE SECTION
+=========================== */
+#profile{
+background:var(--paper);
+padding:100px 0;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+gap:40px;
+margin-top:50px;
+}
+
+.card{
+background:white;
+padding:40px 30px;
+border-radius:12px;
+border-left:4px solid var(--aqua);
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+transition:all 0.3s ease;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.card h3{
+color:var(--ocean);
+margin-top:0;
+}
+
+.card p{
+color:var(--muted);
+line-height:1.8;
+margin-bottom:0;
+}
+
+/* ===========================
+   BAND SECTION (alternate bg)
+=========================== */
+.band{
+background:linear-gradient(135deg, #f8f9fa 0%, #f0f3f7 100%);
+padding:100px 0;
+}
+
+.band.two{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:start;
+}
+
+@media(max-width:968px){
+.band.two{
+grid-template-columns:1fr;
+gap:40px;
+}
+}
+
+.band h2{
+color:var(--ink);
+}
+
+.list{
+list-style:none;
+padding:0;
+margin:0;
+}
+
+.list li{
+padding:25px 0;
+border-bottom:1px solid rgba(0,0,0,.1);
+}
+
+.list li:last-child{
+border-bottom:none;
+}
+
+.list strong{
+color:var(--ocean);
+font-size:1.05rem;
+display:block;
+margin-bottom:8px;
+}
+
+.list span{
+color:var(--muted);
+line-height:1.7;
+display:block;
+}
+
+/* ===========================
+   PUBLICATIONS SECTION
+=========================== */
+#publications{
+background:var(--paper);
+padding:100px 0;
+}
+
+.pub{
+display:flex;
+flex-direction:column;
+gap:20px;
+margin-top:50px;
+}
+
+.pub a{
+display:block;
+padding:20px;
+background:white;
+border-left:4px solid var(--gold);
+text-decoration:none;
+color:var(--ocean);
+font-weight:600;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(0,0,0,.06);
+transition:all 0.3s ease;
+line-height:1.6;
+}
+
+.pub a:hover{
+background:#fffbf5;
+transform:translateX(8px);
+box-shadow:0 8px 20px rgba(233, 183, 93, 0.2);
+color:var(--ink);
+}
+
+.pub a::after{
+content:" ↗";
+}
+
+/* ===========================
+   CONTACT & COLLABORATION
+=========================== */
+#contact{
+background:linear-gradient(135deg, #061927, #116b74);
+color:white;
+padding:100px 0;
+text-align:center;
+}
+
+#contact h2{
+color:white;
+}
+
+#contact .eyebrow{
+color:#a4eee7;
+}
+
+#contact p{
+color:#dceff2;
+font-size:1.05rem;
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.social{
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.social a{
+display:inline-block;
+padding:12px 24px;
+background:rgba(255,255,255,.15);
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-weight:600;
+border:1px solid rgba(255,255,255,.3);
+transition:all 0.3s ease;
+}
+
+.social a:hover{
+background:var(--gold);
+color:var(--ink);
+border-color:var(--gold);
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+.footer{
+background:var(--ink);
+color:rgba(255,255,255,.7);
+padding:40px 0;
+text-align:center;
+font-size:0.9rem;
+margin-top:0;
+}
+
+.footer a{
+color:var(--gold);
+text-decoration:none;
+}
+
+.footer a:hover{
+text-decoration:underline;
+}
+
+/* ===========================
+   LANGUAGE TOGGLE
+=========================== */
+[data-fr]{
+display:none;
+}
+
+body.fr [data-en]{
+display:none;
+}
+
+body.fr [data-fr]{
+display:block;
+}
+
+body.fr [data-fr].inline{
+display:inline;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+@media(max-width:768px){
+.nav{
+flex-direction:column;
+gap:20px;
+}
+
+.links{
+flex-direction:column;
+gap:15px;
+}
+
+.intro h1{
+font-size:2.5rem;
+}
+
+.grid{
+grid-template-columns:1fr;
+gap:30px;
+}
+
+.band.two{
+grid-template-columns:1fr;
+}
+
+.cta{
+flex-direction:column;
+}
+
+.button{
+width:100%;
+text-align:center;
+}
+
+section{
+padding:60px 0;
+}
+}
+
+@media(max-width:480px){
+.wrap{
+padding:0 16px;
+}
+
+.brand{
+font-size:1rem;
+}
+
+.profile-pic{
+width:80px;
+height:80px;
+}
+
+.intro h1{
+font-size:2rem;
+}
+
+.links a{
+font-size:0.85rem;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.title{
+font-size:1.5rem;
+}
+
+.card{
+padding:25px 20px;
+}
+
+.list li{
+padding:18px 0;
+}
+}
+
+/* ===========================
+   ACCESSIBILITY
+=========================== */
+@media(prefers-reduced-motion: reduce){
+* {
+animation:none !important;
+transition:none !important;
+}
+}
+
+:focus{
+outline:2px solid var(--gold);
+outline-offset:2px;
+}
+
+button:focus,
+a:focus{
+outline:2px solid var(--gold);
+outline-offset:2px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===========================
+     HERO + HEADER
+=========================== -->
+<header class="hero">
+<div class="wrap">
+<nav class="nav">
+<div class="brand">
+<span style="font-size: 2rem; margin-bottom: 8px;">🌍</span>
+<span>DR. IMED<br>BEN SLIMENE</span>
+</div>
+
+<div class="links">
+<a href="#profile">Profile</a>
+<a href="#research">Research</a>
+<a href="#publications">Publications</a>
+<a href="#contact">Contact</a>
+<button class="lang" id="lang">FR</button>
+</div>
+</nav>
+
+<div class="intro" style="margin-top:60px;">
+<div class="kicker" data-en>Hydrogeologist · Geospatial Scientist</div>
+<div class="kicker" data-fr>Hydrogéologue · Scientifique géospatial</div>
+
+<h1 data-en>Groundwater intelligence for resilient landscapes.</h1>
+<h1 data-fr>Intelligence géospatiale pour une gestion durable des eaux souterraines.</h1>
+
+<p data-en>PhD in Applied Geology. I combine hydrogeochemistry, GIS, remote sensing and machine learning to understand and model groundwater systems in arid and semi-arid regions.</p>
+<p data-fr>Docteur en géologie appliquée. Je combine l'hydrogéochimie, les SIG, la télédétection et l'intelligence artificielle pour comprendre et modéliser les systèmes aquifères des régions arides et semi-arides.</p>
+
+<div class="cta">
+<a class="button primary" href="#publications" data-en>Explore publications</a>
+<a class="button primary" href="#publications" data-fr>Voir les publications</a>
+<a class="button secondary" href="https://github.com/imedlcd" target="_blank" data-en>GitHub profile</a>
+<a class="button secondary" href="https://github.com/imedlcd" target="_blank" data-fr>Profil GitHub</a>
+</div>
+</div>
+
+</div>
+</header>
+
+<!-- ===========================
+     MAIN CONTENT
+=========================== -->
+<main>
+
+<!-- ===========================
+     SCIENTIFIC PROFILE
+=========================== -->
+<section id="profile">
+<div class="wrap">
+<div class="eyebrow" data-en>Scientific profile</div>
+<div class="eyebrow" data-fr>Profil scientifique</div>
+
+<h2 class="title" data-en>From geospatial data to practical water decisions.</h2>
+<h2 class="title" data-fr>Des données géospatiales aux décisions concrètes pour la gestion de l'eau.</h2>
+
+<p class="lead" data-en>I am a PhD researcher in Applied Geology specialized in hydrogeology, GIS, remote sensing and machine learning. My research focuses on understanding groundwater systems through integrated approaches combining geological, hydrochemical and geospatial information.</p>
+<p class="lead" data-fr>Je suis docteur en géologie appliquée spécialisé en hydrogéologie, SIG, télédétection et intelligence artificielle. Mes recherches portent sur la compréhension des systèmes aquifères à travers des approches intégrées combinant données géologiques, hydrogéochimiques et géospatiales.</p>
+
+<div class="grid">
+<article class="card">
+<h3 data-en>Hydrogeology</h3>
+<h3 data-fr>Hydrogéologie</h3>
+<p data-en>Groundwater systems characterization, hydrochemical assessment, vulnerability analysis and sustainable water resources management.</p>
+<p data-fr>Caractérisation des systèmes aquifères, évaluation hydrogéochimique, analyse de vulnérabilité et gestion durable des ressources en eau.</p>
+</article>
+
+<article class="card">
+<h3>GIS & Remote Sensing</h3>
+<p data-en>Spatial analysis, satellite image processing, lineament extraction and hydrogeological mapping.</p>
+<p data-fr>Analyse spatiale, traitement d'images satellitaires, extraction des linéaments et cartographie hydrogéologique.</p>
+</article>
+
+<article class="card">
+<h3 data-en>Machine Learning</h3>
+<h3 data-fr>Apprentissage automatique</h3>
+<p data-en>Data-driven modelling using Random Forest, ANN, KNN and multivariate statistical approaches.</p>
+<p data-fr>Modélisation basée sur les données utilisant Random Forest, ANN, KNN et les méthodes statistiques multivariées.</p>
+</article>
+</div>
+
+</div>
+</section>
+
+<!-- ===========================
+     RESEARCH AXES
+=========================== -->
+<section class="band" id="research">
+<div class="wrap">
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;">
+<div>
+<div class="eyebrow" data-en>Research focus</div>
+<div class="eyebrow" data-fr>Axes de recherche</div>
+
+<h2 class="title" data-en>Integrated methods for groundwater under environmental stress.</h2>
+<h2 class="title" data-fr>Méthodes intégrées pour l'étude des nappes soumises aux pressions environnementales.</h2>
+
+<p data-en>My research combines geological structures, hydrochemical indicators, remote sensing products and artificial intelligence to improve groundwater assessment and prediction.</p>
+<p data-fr>Mes recherches combinent les structures géologiques, les indicateurs hydrogéochimiques, les données de télédétection et l'intelligence artificielle afin d'améliorer l'évaluation et la prédiction du comportement des eaux souterraines.</p>
+</div>
+
+<ul class="list">
+<li>
+<strong data-en>Remote Sensing + GIS</strong>
+<strong data-fr style="display:none;">Télédétection + SIG</strong>
+<span data-en>Lineament analysis, spatial modelling and hydrogeological decision support.</span>
+<span data-fr>Analyse des linéaments, modélisation spatiale et aide à la décision hydrogéologique.</span>
+</li>
+
+<li>
+<strong data-en>Hydrochemistry & Isotopes</strong>
+<strong data-fr style="display:none;">Hydrogéochimie & Isotopes</strong>
+<span data-en>Water quality indices, hydrochemical facies, stable isotopes and multivariate statistics.</span>
+<span data-fr>Indices de qualité de l'eau, faciès hydrochimiques, isotopes stables et statistiques multivariées.</span>
+</li>
+
+<li>
+<strong data-en>Machine Learning</strong>
+<strong data-fr style="display:none;">Apprentissage automatique</strong>
+<span data-en>Predictive models for groundwater quality, recharge assessment and spatial analysis.</span>
+<span data-fr>Modèles prédictifs pour la qualité des eaux souterraines, l'estimation de la recharge et l'analyse spatiale.</span>
+</li>
+</ul>
+</div>
+
+</div>
+</section>
+
+<!-- ===========================
+     PUBLICATIONS
+=========================== -->
+<section id="publications">
+<div class="wrap">
+<div class="eyebrow" data-en>Selected publications</div>
+<div class="eyebrow" data-fr>Publications sélectionnées</div>
+
+<h2 class="title" data-en>Scientific contributions</h2>
+<h2 class="title" data-fr>Contributions scientifiques</h2>
+
+<div class="pub">
+<a href="https://doi.org/10.1007/s41207-026-01202-z" target="_blank" rel="noopener">
+<span data-en>Predictive Modeling and Spatial Mapping of Groundwater Quality for Irrigation Using Integrated Indices and Machine Learning (2026)</span>
+<span data-fr style="display:none;">Modélisation prédictive et cartographie spatiale de la qualité des eaux souterraines pour l'irrigation (2026)</span>
+</a>
+
+<a href="https://doi.org/10.1016/j.jafrearsci.2026.106210" target="_blank" rel="noopener">
+<span data-en>Integrating Remote Sensing, GIS, and Machine Learning for Lineament Analysis and Hydrogeological Assessment in Northern Tunisia (2026)</span>
+<span data-fr style="display:none;">Intégration de la télédétection, des SIG et du machine learning pour l'analyse des linéaments (2026)</span>
+</a>
+
+<a href="https://doi.org/10.7343/as-2025-816" target="_blank" rel="noopener">
+<span data-en>Geospatial Mapping and Multivariate Statistical Analysis for Assessing Groundwater Quality (2025)</span>
+<span data-fr style="display:none;">Cartographie géospatiale et analyse statistique multivariée pour l'évaluation de la qualité des eaux (2025)</span>
+</a>
+
+<a href="https://doi.org/10.3390/w15193495" target="_blank" rel="noopener">
+<span data-en>Applying Multivariate Analysis and Machine Learning Approaches to Evaluating Groundwater Quality (2023)</span>
+<span data-fr style="display:none;">Application de l'analyse multivariée et du machine learning à l'évaluation de la qualité (2023)</span>
+</a>
+
+<a href="https://doi.org/10.1080/15320383.2023.2271987" target="_blank" rel="noopener">
+<span data-en>Assessment of Heavy Metals Contamination in Surface Sediments of the El Bey Wadi, Tunisia (2023)</span>
+<span data-fr style="display:none;">Évaluation de la contamination par les métaux lourds dans les sédiments de surface (2023)</span>
+</a>
+
+<a href="https://iaeme.com/Home/article_id/IJCIET_03_02_043" target="_blank" rel="noopener">
+<span data-en>Intrinsic Vulnerability Analysis to Nitrate Contamination (2012)</span>
+<span data-fr style="display:none;">Analyse de la vulnérabilité intrinsèque à la contamination par les nitrates (2012)</span>
+</a>
+</div>
+
+</div>
+</section>
+
+</main>
+
+<!-- ===========================
+     CONTACT & COLLABORATION
+=========================== -->
+<section id="contact">
+<div class="wrap">
+<div class="eyebrow" data-en>Collaboration</div>
+<div class="eyebrow" data-fr>Collaboration scientifique</div>
+
+<h2 data-en>Open to research collaborations and postdoctoral opportunities.</h2>
+<h2 data-fr>Ouvert aux collaborations scientifiques et aux opportunités postdoctorales.</h2>
+
+<p data-en>I am interested in collaborations related to hydrogeology, groundwater modelling, GIS, remote sensing and artificial intelligence applied to water resources.</p>
+<p data-fr>Je suis intéressé par les collaborations dans les domaines de l'hydrogéologie, la modélisation des eaux souterraines, les SIG, la télédétection et l'intelligence artificielle appliquée aux ressources en eau.</p>
+
+<p style="font-weight: 600; margin: 30px 0;">
+📍 <span data-en>Nabeul, Tunisia</span><span data-fr style="display:none;">Nabeul, Tunisie</span><br>
+✉️ <a href="mailto:imedlcd@gmail.com" style="color:var(--gold); text-decoration:none;">imedlcd@gmail.com</a>
+</p>
+
+<div class="social">
+<a href="mailto:imedlcd@gmail.com" data-en>Email</a>
+<a href="mailto:imedlcd@gmail.com" style="display:none;" data-fr>Email</a>
+<a href="https://orcid.org/0009-0007-6490-530X" target="_blank" rel="noopener">ORCID</a>
+<a href="https://scholar.google.com/" target="_blank" rel="noopener" data-en>Google Scholar</a>
+<a href="https://scholar.google.com/" target="_blank" rel="noopener" style="display:none;" data-fr>Google Scholar</a>
+<a href="https://www.researchgate.net/profile/Imed-Ben-Slimene" target="_blank" rel="noopener">ResearchGate</a>
+<a href="https://www.linkedin.com/in/imed-ben-slimene-5ab531289" target="_blank" rel="noopener">LinkedIn</a>
+<a href="https://github.com/imedlcd" target="_blank" rel="noopener">GitHub</a>
+</div>
+
+</div>
+</section>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer class="footer">
+<div class="wrap">
+© <span id="year"></span> Dr. Imed Ben Slimene · Hydrogeology · GIS · Remote Sensing · Machine Learning
+</div>
+</footer>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+// Current year
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Language toggle
+const body = document.body;
+const langBtn = document.getElementById("lang");
+
+langBtn.addEventListener("click", function(){
+  body.classList.toggle("fr");
+  
+  if(body.classList.contains("fr")){
+    langBtn.textContent = "EN";
+    document.documentElement.lang = "fr";
+    localStorage.setItem("lang", "fr");
+  } else {
+    langBtn.textContent = "FR";
+    document.documentElement.lang = "en";
+    localStorage.setItem("lang", "en");
+  }
+});
+
+// Load saved language preference
+window.addEventListener("load", function(){
+  const savedLang = localStorage.getItem("lang");
+  if(savedLang === "fr"){
+    body.classList.add("fr");
+    langBtn.textContent = "EN";
+    document.documentElement.lang = "fr";
+  }
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if(href !== '#') {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if(target){
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>
