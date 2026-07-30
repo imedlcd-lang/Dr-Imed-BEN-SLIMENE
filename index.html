@@ -474,7 +474,22 @@ color:var(--ink);
 .pub a::after{
 content:"";
 }
- 
+
+/* Presentations grid and video styling */
+.presentations-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+.video-card video{
+  width:100%;
+  height:auto;
+  border-radius:6px;
+  background:#000;
+}
+.video-card .caption{ margin-top:8px; font-weight:600; color:var(--ocean); }
+
 /* ===========================
    CONTACT & COLLABORATION
 =========================== */
@@ -738,8 +753,8 @@ outline-offset:2px;
 <div class="cta">
 <a class="button primary" href="#publications" data-en>Explore publications</a>
 <a class="button primary" href="#publications" data-fr>Voir les publications</a>
-<a class="button secondary" href="https://github.com/imedlcd" target="_blank" data-en>GitHub profile</a>
-<a class="button secondary" href="https://github.com/imedlcd" target="_blank" data-fr>Profil GitHub</a>
+<a class="button secondary" href="#presentations" data-en>Explore presentations</a>
+<a class="button secondary" href="#presentations" data-fr>Explore les presentations</a>
 </div>
 </div>
 
@@ -874,6 +889,44 @@ outline-offset:2px;
 </div>
 
 </div>
+</section>
+
+<!-- ===========================
+     PRESENTATIONS
+=========================== -->
+<section id="presentations">
+  <div class="wrap">
+    <div class="eyebrow" data-en>Presentations</div>
+    <div class="eyebrow" data-fr>Présentations</div>
+
+    <h2 class="title" data-en>Explore presentations</h2>
+    <h2 class="title" data-fr>Explore les presentations</h2>
+
+    <div class="presentations-grid">
+      <!-- Video placeholders: upload 4 MP4 files to assets/presentations/ named video1.mp4..video4.mp4 -->
+      <article class="card video-card">
+        <video controls preload="metadata" src="assets/presentations/video1.mp4"></video>
+        <p class="caption" data-en>Presentation 1</p>
+        <p class="caption" data-fr>Présentation 1</p>
+      </article>
+      <article class="card video-card">
+        <video controls preload="metadata" src="assets/presentations/video2.mp4"></video>
+        <p class="caption" data-en>Presentation 2</p>
+        <p class="caption" data-fr>Présentation 2</p>
+      </article>
+      <article class="card video-card">
+        <video controls preload="metadata" src="assets/presentations/video3.mp4"></video>
+        <p class="caption" data-en>Presentation 3</p>
+        <p class="caption" data-fr>Présentation 3</p>
+      </article>
+      <article class="card video-card">
+        <video controls preload="metadata" src="assets/presentations/video4.mp4"></video>
+        <p class="caption" data-en>Presentation 4</p>
+        <p class="caption" data-fr>Présentation 4</p>
+      </article>
+    </div>
+
+  </div>
 </section>
 
 <section id='gallery'>
