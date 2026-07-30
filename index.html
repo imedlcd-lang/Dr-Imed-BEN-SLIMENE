@@ -975,6 +975,70 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 </script>
 
+<!-- Lightbox markup -->
+<div id="lightbox" aria-hidden="true">
+  <div class="close" aria-label="Close">&times;</div>
+  <div class="nav prev" aria-hidden="true">&#10094;</div>
+  <img src="" alt="">
+  <div class="caption"></div>
+  <div class="nav next" aria-hidden="true">&#10095;</div>
+</div>
+
+<script>
+(function(){
+  const galleryLinks = Array.from(document.querySelectorAll('.gallery-item'));
+  if(!galleryLinks.length) return;
+  const images = galleryLinks.map(a => a.getAttribute('href'));
+  const captions = galleryLinks.map(a => (a.querySelector('img') && a.querySelector('img').alt) || a.getAttribute('href'));
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = lightbox.querySelector('img');
+  const lbCaption = lightbox.querySelector('.caption');
+  const closeBtn = lightbox.querySelector('.close');
+  const prevBtn = lightbox.querySelector('.nav.prev');
+  const nextBtn = lightbox.querySelector('.nav.next');
+  let idx = 0;
+
+  function open(i){
+    idx = i;
+    lbImg.src = images[idx];
+    lbImg.alt = captions[idx] || '';
+    lbCaption.textContent = captions[idx] || '';
+    lightbox.style.display = 'flex';
+    lightbox.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close(){
+    lightbox.style.display = 'none';
+    lightbox.setAttribute('aria-hidden','true');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+  function next(){ open((idx+1) % images.length); }
+  function prev(){ open((idx-1+images.length) % images.length); }
+
+  galleryLinks.forEach((a,i)=>{
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      open(i);
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  lightbox.addEventListener('click', function(e){ if(e.target === lightbox){ close(); } });
+
+  document.addEventListener('keydown', function(e){
+    if(lightbox.style.display === 'flex'){
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
 
