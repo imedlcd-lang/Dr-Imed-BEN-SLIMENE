@@ -510,22 +510,35 @@ margin-top:40px;
 }
  
 .social a{
-display:inline-block;
-padding:12px 24px;
-background:rgba(255,255,255,.15);
-color:white;
-text-decoration:none;
-border-radius:8px;
-font-weight:600;
-border:1px solid rgba(255,255,255,.3);
-transition:all 0.3s ease;
+  display:inline-block;
+  padding:12px 24px;
+  background:rgba(255,255,255,.15);
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:600;
+  border:1px solid rgba(255,255,255,.3);
+  transition:all 0.3s ease;
 }
- 
+
 .social a:hover{
-background:var(--gold);
-color:var(--ink);
-border-color:var(--gold);
+  background:var(--gold);
+  color:var(--ink);
+  border-color:var(--gold);
 }
+
+/* social-icon: square icon buttons for CVs */
+.social-icon{
+  display:inline-flex;
+  width:48px;
+  height:48px;
+  padding:10px;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+}
+.social-icon svg{ width:20px; height:20px; }
+
  
 /* ===========================
    FOOTE
@@ -925,14 +938,27 @@ outline-offset:2px;
 </p>
 
 <div class="social">
-<a href="mailto:imedlcd@gmail.com" data-en>Email</a>
-<a href="mailto:imedlcd@gmail.com" style="display:none;" data-fr>Email</a>
-<a href="https://orcid.org/0009-0007-6490-530X" target="_blank" rel="noopener">ORCID</a>
-<a href="https://scholar.google.com/" target="_blank" rel="noopener" data-en>Google Scholar</a>
-<a href="https://scholar.google.com/" target="_blank" rel="noopener" style="display:none;" data-fr>Google Scholar</a>
-<a href="https://www.researchgate.net/profile/Imed-Ben-Slimene" target="_blank" rel="noopener">ResearchGate</a>
-<a href="https://www.linkedin.com/in/imed-ben-slimene-5ab531289" target="_blank" rel="noopener">LinkedIn</a>
-<a href="https://github.com/imedlcd" target="_blank" rel="noopener">GitHub</a>
+  <a href="mailto:imedlcd@gmail.com">Email</a>
+  <a href="https://orcid.org/0009-0007-6490-530X" target="_blank" rel="noopener">ORCID</a>
+  <a href="https://www.researchgate.net/profile/Imed-Ben-Slimene" target="_blank" rel="noopener">ResearchGate</a>
+  <a href="https://www.linkedin.com/in/imed-ben-slimene-5ab531289" target="_blank" rel="noopener">LinkedIn</a>
+  <!-- CV icons: French and English -->
+  <a href="CV_Imed_Ben_Slimene_Fr.docx" download class="social-icon" title="Télécharger CV (FR)" aria-label="Télécharger CV (FR)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M14 2H6C5.44772 2 5 2.44772 5 3V21C5 21.5523 5.44772 22 6 22H18C18.5523 22 19 21.5523 19 21V8L14 2Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 2V8H19" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 12H15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 16H15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <a href="CV_Imed_Ben_Slimene_EN.docx" download class="social-icon" title="Download CV (EN)" aria-label="Download CV (EN)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M14 2H6C5.44772 2 5 2.44772 5 3V21C5 21.5523 5.44772 22 6 22H18C18.5523 22 19 21.5523 19 21V8L14 2Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 2V8H19" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 12H15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 16H15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
 </div>
 
 </div>
