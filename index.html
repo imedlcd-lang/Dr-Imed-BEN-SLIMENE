@@ -724,9 +724,13 @@ outline-offset:2px;
 /* Teaching resources */
 #resources{ background:var(--paper); }
 .resource-intro{ max-width:760px; color:var(--muted); margin-bottom:30px; }
-.resource-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; }
+.resource-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr)); gap:20px; }
 .resource-category{ background:#fff; border:1px solid rgba(13,95,117,.14); border-radius:14px; padding:24px; box-shadow:0 6px 20px rgba(7,29,43,.06); }
 .resource-category h3{ color:var(--ocean); margin:0 0 14px; }
+.resource-category.materials-category{ grid-column:1/-1; }
+.resource-modules{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+.resource-module{ background:#f8fbfa; border:1px solid rgba(13,95,117,.12); border-radius:10px; padding:18px; }
+.resource-module h4{ color:var(--ocean); font-size:1.05rem; line-height:1.35; margin:0 0 10px; }
 .resource-list{ list-style:none; padding:0; margin:0; }
 .resource-list li{ border-top:1px solid rgba(7,29,43,.09); padding:12px 0; }
 .resource-list a{ color:var(--ocean); font-weight:650; text-decoration:none; overflow-wrap:anywhere; }
@@ -881,31 +885,101 @@ outline-offset:2px;
 <div class="wrap">
 <div class="eyebrow" data-en>Teaching resources</div>
 <div class="eyebrow" data-fr>Ressources pédagogiques</div>
-<h2 class="title" data-en>Fundamental Concepts, Tutorials, Practicals and Learning Materials.</h2>
-<h2 class="title" data-fr>Notions fondamentales, travaux dirigés, travaux pratiques et supports pédagogiques.</h2>
-<p class="resource-intro" data-en>Download the available PDFs. New PDF files added to one of the folders below will appear here automatically after the site is published.</p>
-<p class="resource-intro" data-fr>Téléchargez les fichiers PDF disponibles. Les nouveaux PDF ajoutés dans l’un des dossiers ci-dessous apparaîtront automatiquement ici après la publication du site.</p>
+<h2 class="title" data-en>Fundamental Concepts, Tutorials, Practicals and Teaching Materials.</h2>
+<h2 class="title" data-fr>Notions fondamentales, travaux dirigés, travaux pratiques et matériels pédagogiques.</h2>
+<p class="resource-intro" data-en>Download the available PDFs. Add each PDF to the matching folder on GitHub; it will appear here automatically after the site is published.</p>
+<p class="resource-intro" data-fr>Téléchargez les PDF disponibles. Ajoutez chaque PDF dans le dossier correspondant sur GitHub ; il apparaîtra ici automatiquement après la publication du site.</p>
 
 <div class="resource-grid">
-  <article class="resource-category" data-resource-folder="Fundamental Concepts">
-    <h3>Notions fondamentales</h3>
-    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
-    <ul class="resource-list"></ul>
+  <article class="resource-category">
+    <h3><span data-en>Fundamental Concepts</span><span data-fr>Notions fondamentales</span></h3>
+    <div class="resource-modules">
+      <article class="resource-module" data-resource-folder="Notions de Base/Géochimie Isotopique">
+        <h4><span data-en>Isotope Geochemistry</span><span data-fr>Géochimie isotopique</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="Notions de Base/Géochimie élémentaire">
+        <h4><span data-en>Elemental Geochemistry</span><span data-fr>Géochimie élémentaire</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="Notions de Base/Digital I">
+        <h4>Digital I</h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="Notions de Base/Hydrogéologie">
+        <h4><span data-en>Hydrogeology</span><span data-fr>Hydrogéologie</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+    </div>
   </article>
-  <article class="resource-category" data-resource-folder="TP">
-    <h3>TP</h3>
-    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
-    <ul class="resource-list"></ul>
+  <article class="resource-category">
+    <h3><span data-en>Practical Work (TP)</span><span data-fr>Travaux pratiques (TP)</span></h3>
+    <div class="resource-modules">
+      <article class="resource-module" data-resource-folder="TP/Géochimie Isotopique">
+        <h4><span data-en>Isotope Geochemistry</span><span data-fr>Géochimie isotopique</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="TP/Géochimie élémentaire">
+        <h4><span data-en>Elemental Geochemistry</span><span data-fr>Géochimie élémentaire</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="TP/Digital I">
+        <h4>Digital I</h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="TP/Hydrogéologie">
+        <h4><span data-en>Hydrogeology</span><span data-fr>Hydrogéologie</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+    </div>
   </article>
-  <article class="resource-category" data-resource-folder="TD">
-    <h3>TD</h3>
-    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
-    <ul class="resource-list"></ul>
+  <article class="resource-category">
+    <h3><span data-en>Tutorials (TD)</span><span data-fr>Travaux dirigés (TD)</span></h3>
+    <div class="resource-modules">
+      <article class="resource-module" data-resource-folder="TD/Géochimie Isotopique">
+        <h4><span data-en>Isotope Geochemistry</span><span data-fr>Géochimie isotopique</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="TD/Géochimie élémentaire">
+        <h4><span data-en>Elemental Geochemistry</span><span data-fr>Géochimie élémentaire</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="TD/Digital I">
+        <h4>Digital I</h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="TD/Hydrogéologie">
+        <h4><span data-en>Hydrogeology</span><span data-fr>Hydrogéologie</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
+      </article>
+    </div>
   </article>
-  <article class="resource-category" data-resource-folder="Learning Materials">
-    <h3>supports pédagogiques</h3>
-    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
-    <ul class="resource-list"></ul>
+  <article class="resource-category materials-category">
+    <h3><span data-en>Teaching Materials</span><span data-fr>Matériels pédagogiques</span></h3>
+    <p class="resource-intro" data-en>Choose a module to view or download its PDFs.</p>
+    <p class="resource-intro" data-fr>Choisissez un module pour consulter ou télécharger ses PDF.</p>
+    <div class="resource-modules">
+      <article class="resource-module" data-resource-folder="Matériels pédagogiques/Géochimie Isotopique">
+        <h4><span data-en>Isotope Geochemistry</span><span data-fr>Géochimie isotopique</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
+        <ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="Matériels pédagogiques/Géochimie élémentaire">
+        <h4><span data-en>Elemental Geochemistry</span><span data-fr>Géochimie élémentaire</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
+        <ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="Matériels pédagogiques/Digital I">
+        <h4>Digital I</h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
+        <ul class="resource-list"></ul>
+      </article>
+      <article class="resource-module" data-resource-folder="Matériels pédagogiques/Hydrogéologie">
+        <h4><span data-en>Hydrogeology</span><span data-fr>Hydrogéologie</span></h4>
+        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
+        <ul class="resource-list"></ul>
+      </article>
+    </div>
   </article>
 </div>
 </div>
@@ -1151,7 +1225,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// List PDFs directly from the four public GitHub folders.
+// List PDFs from the resource folders and teaching-material modules on GitHub.
 (function(){
   const treeUrl = "https://api.github.com/repos/imedlcd-lang/Dr-Imed-BEN-SLIMENE/git/trees/main?recursive=1";
   const siteRoot = "https://imedlcd-lang.github.io/Dr-Imed-BEN-SLIMENE/";
