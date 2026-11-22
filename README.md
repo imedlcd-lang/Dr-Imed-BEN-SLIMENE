@@ -14,7 +14,7 @@
 
 ## PDF download counters (Cloudflare Worker)
 
-The teaching-resource list is generated from the repository’s `Notions de Base`, `TP`, `TD`, `Matériels pédagogiques`, `Cours` and `Data` folders, including nested PDFs; no site build step is needed. Per-PDF download counts use a Cloudflare Worker backed by D1.
+The teaching-resource list is generated from the repository’s `Notions de Base`, `TP`, `TD`, `Matériels pédagogiques`, `Cours` and `Data` folders, including nested PDFs and Excel `.xlsx` files; no site build step is needed. Per-file download counts use a Cloudflare Worker backed by D1.
 
 To deploy the counter:
 
@@ -23,7 +23,7 @@ To deploy the counter:
 3. Run `npx wrangler d1 migrations apply teaching-resource-counter --remote`, then `npx wrangler deploy`.
 4. Set the deployed Worker’s HTTPS origin in the `resource-counter-worker-url` meta tag in `index.html` and publish the site update. The current page is configured with the deployed endpoint.
 
-The deployed Worker is available at `https://teaching-resource-counter.imedlcd-lang.workers.dev`. It exposes `/count?path=...` for the displayed total and `/download?path=...` for incrementing the D1 counter before redirecting to the existing GitHub Pages PDF. CORS permits the configured `ALLOWED_ORIGIN` only; update it in `wrangler.toml` if the site uses a different origin. `SITE_ROOT` must remain the HTTPS GitHub Pages root ending in `/`. The D1 migration creates the counter table. Worker code and migration are in `cloudflare-worker/`.
+The deployed Worker is available at `https://teaching-resource-counter.imedlcd-lang.workers.dev`. It exposes `/count?path=...` for the displayed total and `/download?path=...` for incrementing the D1 counter before redirecting to the existing GitHub Pages PDF or XLSX file. CORS permits the configured `ALLOWED_ORIGIN` only; update it in `wrangler.toml` if the site uses a different origin. `SITE_ROOT` must remain the HTTPS GitHub Pages root ending in `/`. The D1 migration creates the counter table. Worker code and migration are in `cloudflare-worker/`.
 
 ---
 

@@ -33,7 +33,7 @@ function resourcePath(value) {
   const segments = value.split("/");
   if (segments.length < 2 || !RESOURCE_FOLDERS.has(segments[0])
     || segments.some(segment => !segment || segment === "." || segment === "..")
-    || !segments[segments.length - 1].toLowerCase().endsWith(".pdf")) {
+    || !/\.(pdf|xlsx)$/i.test(segments[segments.length - 1])) {
     return null;
   }
   return value;
@@ -63,7 +63,7 @@ export default {
 
     const path = resourcePath(url.searchParams.get("path"));
     if (!path) {
-      return jsonResponse(request, env, { error: "A valid PDF path in a teaching-resource folder is required." }, 400);
+      return jsonResponse(request, env, { error: "A valid PDF or XLSX path in a teaching-resource folder is required." }, 400);
     }
 
     if (url.pathname === "/count") {

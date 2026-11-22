@@ -55,7 +55,8 @@ test("accepts PDFs in the current categorized resource folders", async () => {
     "Notions de Base/Géochimie Isotopique/Introduction.pdf",
     "TP/Géochimie Isotopique/Exercices.pdf",
     "Matériels pédagogiques/Hydrogéologie/Corrigés.pdf",
-    "Data/dataset.pdf"
+    "Data/dataset.pdf",
+    "Matériels pédagogiques/Digital I/Jeu_A.xlsx"
   ]) {
     const response = await worker.fetch(new Request(
       `https://counter.example/count?path=${encodeURIComponent(path)}`
@@ -65,9 +66,31 @@ test("accepts PDFs in the current categorized resource folders", async () => {
   }
 });
 
+test("counts and redirects XLSX downloads", async () => {
+  const env = createEnv();
+  const path = "Matériels pédagogiques/Digital I/Jeu_A.xlsx";
+
+  const initial = await worker.fetch(new Request(
+    `https://counter.example/count?path=${encodeURIComponent(path)}`
+  ), env);
+  assert.deepEqual(await initial.json(), { path, downloads: 0 });
+
+  const redirect = await worker.fetch(new Request(
+    `https://counter.example/download?path=${encodeURIComponent(path)}`
+  ), env);
+  assert.equal(redirect.status, 302);
+  assert.equal(redirect.headers.get("Location"),
+    "https://imedlcd-lang.github.io/Dr-Imed-BEN-SLIMENE/Mat%C3%A9riels%20p%C3%A9dagogiques/Digital%20I/Jeu_A.xlsx");
+
+  const updated = await worker.fetch(new Request(
+    `https://counter.example/count?path=${encodeURIComponent(path)}`
+  ), env);
+  assert.deepEqual(await updated.json(), { path, downloads: 1 });
+});
+
 test("rejects paths outside resource folders and blocks CORS for other origins", async () => {
   const env = createEnv();
-  for (const path of ["Other/file.pdf", "Cours/../TP/file.pdf", "Data/file.txt"]) {
+  for (const path of ["Other/file.pdf", "Cours/../TP/file.pdf", "Data/file.txt", "Data/table.csv"]) {
     const invalid = await worker.fetch(new Request(
       `https://counter.example/download?path=${encodeURIComponent(path)}`
     ), env);
