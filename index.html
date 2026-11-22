@@ -936,15 +936,12 @@ outline-offset:2px;
         <h4><span data-en>Hydrogeology</span><span data-fr>Hydrogéologie</span></h4>
         <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
       </article>
-      <article class="resource-module" data-resource-folder="TP" data-resource-root-only>
-        <h4><span data-en>Additional practicals</span><span data-fr>Autres travaux pratiques</span></h4>
-        <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
-      </article>
       <article class="resource-module" data-resource-folder="TD">
         <h4><span data-en>Tutorial work</span><span data-fr>Travaux dirigés</span></h4>
         <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p><ul class="resource-list"></ul>
       </article>
     </div>
+    <ul class="resource-list" data-resource-folder="TP" data-resource-root-only></ul>
   </article>
   <article class="resource-category materials-category">
     <h3><span data-en>Teaching Materials</span><span data-fr>Matériels pédagogiques</span></h3>
@@ -1258,7 +1255,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const tree = Array.isArray(result.tree) ? result.tree : [];
     cards.forEach(card => {
       const folder = card.dataset.resourceFolder;
-      const list = card.querySelector(".resource-list");
+      const list = card.matches(".resource-list") ? card : card.querySelector(".resource-list");
       card.querySelectorAll(".resource-loading").forEach(message => message.remove());
       const prefix = `${folder}/`;
       const rootOnly = card.hasAttribute("data-resource-root-only");
@@ -1325,7 +1322,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   }).catch(error => {
     cards.forEach(card => {
       card.querySelectorAll(".resource-loading").forEach(message => message.remove());
-      const list = card.querySelector(".resource-list");
+      const list = card.matches(".resource-list") ? card : card.querySelector(".resource-list");
       const message = document.createElement("li");
       message.className = "resource-empty";
       addBilingualText(message, "Files could not be loaded. Please try again later.",
