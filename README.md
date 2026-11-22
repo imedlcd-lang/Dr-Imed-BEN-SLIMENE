@@ -12,6 +12,19 @@
 🔗 ResearchGate: https://www.researchgate.net/profile/Imed-Ben-Slimene  
 🔗 Linkedin: www.linkedin.com/in/imed-ben-slimene-5ab531289                            
 
+## PDF download counters (Cloudflare Worker)
+
+The teaching-resource list remains generated from the `Cours`, `TP`, `TD` and `Data` folders on GitHub; no site build step is needed. Per-PDF download counts use a Cloudflare Worker backed by D1. Until a Worker is deployed and configured, PDFs continue to open from GitHub Pages and the page indicates that counters are not configured.
+
+To deploy the counter:
+
+1. Install Wrangler and sign in with `npx wrangler login`.
+2. From `cloudflare-worker`, run `npx wrangler d1 create teaching-resource-counter` and copy the returned database ID into `wrangler.toml` (the current deployment uses database `b1fea8c2-882e-47b5-9491-aa634aff53e9`).
+3. Run `npx wrangler d1 migrations apply teaching-resource-counter --remote`, then `npx wrangler deploy`.
+4. Copy the deployed Worker’s HTTPS origin into the `resource-counter-worker-url` meta tag in `index.html`, then publish the site update.
+
+The deployed Worker is available at `https://teaching-resource-counter.imedlcd-lang.workers.dev`. It exposes `/count?path=...` for the displayed total and `/download?path=...` for incrementing the D1 counter before redirecting to the existing GitHub Pages PDF. CORS permits the configured `ALLOWED_ORIGIN` only; update it in `wrangler.toml` if the site uses a different origin. `SITE_ROOT` must remain the HTTPS GitHub Pages root ending in `/`. The D1 migration creates the counter table. Worker code and migration are in `cloudflare-worker/`.
+
 ---
 
 ## 🧭 Scientific Profile

@@ -6,6 +6,7 @@
 <meta name="description" content="Dr. Imed Ben Slimene - Hydrogeologist, GIS and Remote Sensing specialist. Research in groundwater, hydrogeochemistry, machine learning and geospatial intelligence.">
 <meta name="keywords" content="Hydrogeology, GIS, Remote Sensing, Machine Learning, Groundwater, Tunisia">
 <meta name="author" content="Dr. Imed Ben Slimene">
+<meta name="resource-counter-worker-url" content="https://teaching-resource-counter.imedlcd-lang.workers.dev">
 <title>Dr. Imed Ben Slimene | Hydrogeologist & Geospatial Scientist</title>
 <style>
 /* ===========================
@@ -732,7 +733,7 @@ outline-offset:2px;
 .resource-list a{ color:var(--ocean); font-weight:650; text-decoration:none; overflow-wrap:anywhere; }
 .resource-list a:hover{ color:#087d83; text-decoration:underline; }
 .resource-empty,.resource-loading{ color:var(--muted); font-size:.92rem; }
-.resource-count{ display:block; color:var(--light-muted); font-size:.82rem; margin-top:4px; }
+.resource-count,.resource-download-count{ display:block; color:var(--light-muted); font-size:.82rem; margin-top:4px; }
 
 /* Lightbox */
 #lightbox{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.85); z-index:9999; }
@@ -881,29 +882,24 @@ outline-offset:2px;
 <div class="wrap">
 <div class="eyebrow" data-en>Teaching resources</div>
 <div class="eyebrow" data-fr>Ressources pédagogiques</div>
-<h2 class="title" data-en>Courses, practicals and learning materials.</h2>
-<h2 class="title" data-fr>Cours, travaux pratiques et supports pédagogiques.</h2>
+<h2 class="title" data-en>Fundamental concepts, practical and tutorial work, and teaching materials.</h2>
+<h2 class="title" data-fr>Notions fondamentales, travaux pratiques et dirigés (TP/TD), et matériels pédagogiques.</h2>
 <p class="resource-intro" data-en>Download the available PDFs. New PDF files added to one of the folders below will appear here automatically after the site is published.</p>
 <p class="resource-intro" data-fr>Téléchargez les fichiers PDF disponibles. Les nouveaux PDF ajoutés dans l’un des dossiers ci-dessous apparaîtront automatiquement ici après la publication du site.</p>
 
 <div class="resource-grid">
-  <article class="resource-category" data-resource-folder="Cours">
-    <h3>Cours</h3>
+  <article class="resource-category" data-resource-folders="Cours">
+    <h3 data-en>Fundamental concepts</h3><h3 data-fr>Notions fondamentales</h3>
     <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
     <ul class="resource-list"></ul>
   </article>
-  <article class="resource-category" data-resource-folder="TP">
-    <h3>TP</h3>
+  <article class="resource-category" data-resource-folders="TP,TD">
+    <h3 data-en>Practical and tutorial work (TP/TD)</h3><h3 data-fr>Travaux pratiques et dirigés (TP/TD)</h3>
     <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
     <ul class="resource-list"></ul>
   </article>
-  <article class="resource-category" data-resource-folder="TD">
-    <h3>TD</h3>
-    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
-    <ul class="resource-list"></ul>
-  </article>
-  <article class="resource-category" data-resource-folder="Data">
-    <h3>Data</h3>
+  <article class="resource-category" data-resource-folders="Data">
+    <h3 data-en>Teaching materials</h3><h3 data-fr>Matériels pédagogiques</h3>
     <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
     <ul class="resource-list"></ul>
   </article>
@@ -1155,7 +1151,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 (function(){
   const treeUrl = "https://api.github.com/repos/imedlcd-lang/Dr-Imed-BEN-SLIMENE/git/trees/main?recursive=1";
   const siteRoot = "https://imedlcd-lang.github.io/Dr-Imed-BEN-SLIMENE/";
-  const cards = Array.from(document.querySelectorAll("[data-resource-folder]"));
+  const configuredWorkerUrl = document.querySelector('meta[name="resource-counter-worker-url"]').content.trim();
+  let workerBaseUrl = "";
+  if (configuredWorkerUrl) {
+    try {
+      const workerUrl = new URL(configuredWorkerUrl);
+      if (workerUrl.protocol !== "https:" || workerUrl.pathname !== "/" || workerUrl.search || workerUrl.hash) {
+        throw new Error("Use the deployed HTTPS Worker origin without a path, query or fragment.");
+      }
+      workerBaseUrl = workerUrl.origin;
+    } catch (error) {
+      console.error("Invalid teaching resource counter Worker URL", error);
+    }
+  }
+  const cards = Array.from(document.querySelectorAll("[data-resource-folders]"));
 
   function addBilingualText(element, english, french){
     const en = document.createElement("span");
@@ -1173,13 +1182,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   }).then(result => {
     const tree = Array.isArray(result.tree) ? result.tree : [];
     cards.forEach(card => {
-      const folder = card.dataset.resourceFolder;
+      const folders = card.dataset.resourceFolders.split(",").map(folder => folder.trim()).filter(Boolean);
       const list = card.querySelector(".resource-list");
       card.querySelectorAll(".resource-loading").forEach(message => message.remove());
-      const prefix = `${folder}/`;
       const pdfs = tree
-        .filter(file => file.type === "blob" && file.path.startsWith(prefix)
-          && !file.path.slice(prefix.length).includes("/")
+        .filter(file => file.type === "blob" && folders.some(folder => file.path.startsWith(`${folder}/`))
           && file.path.toLowerCase().endsWith(".pdf"))
         .sort((a, b) => a.path.localeCompare(b.path, undefined, { sensitivity: "base" }));
 
@@ -1194,10 +1201,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       pdfs.forEach(file => {
         const item = document.createElement("li");
         const link = document.createElement("a");
-        link.href = siteRoot + file.path.split("/").map(encodeURIComponent).join("/");
-        link.download = file.path.split("/").pop();
-        link.textContent = link.download.replace(/\.pdf$/i, "");
+        const matchedFolder = folders.find(folder => file.path.startsWith(`${folder}/`));
+        const relativePath = file.path.slice(matchedFolder.length + 1);
+        const fileName = relativePath.split("/").pop();
+        link.href = workerBaseUrl
+          ? `${workerBaseUrl}/download?path=${encodeURIComponent(file.path)}`
+          : siteRoot + file.path.split("/").map(encodeURIComponent).join("/");
+        link.textContent = relativePath.replace(/\.pdf$/i, "");
         item.appendChild(link);
+
+        const downloadCount = document.createElement("small");
+        downloadCount.className = "resource-download-count";
+        addBilingualText(downloadCount,
+          workerBaseUrl ? "Downloads: loading…" : "Downloads: not configured",
+          workerBaseUrl ? "Téléchargements : chargement…" : "Téléchargements : compteur non configuré");
+        item.appendChild(downloadCount);
+
+        if (workerBaseUrl) {
+          const countUrl = new URL("/count", workerBaseUrl);
+          countUrl.searchParams.set("path", file.path);
+          fetch(countUrl).then(response => {
+            if (!response.ok) throw new Error(`Worker returned ${response.status}`);
+            return response.json();
+          }).then(result => {
+            if (!Number.isSafeInteger(result.downloads) || result.downloads < 0) {
+              throw new Error("Worker returned an invalid download count.");
+            }
+            downloadCount.querySelector("[data-en]").textContent = `Downloads: ${result.downloads}`;
+            downloadCount.querySelector("[data-fr]").textContent = `Téléchargements : ${result.downloads}`;
+          }).catch(error => {
+            downloadCount.querySelector("[data-en]").textContent = "Downloads: unavailable";
+            downloadCount.querySelector("[data-fr]").textContent = "Téléchargements : indisponible";
+            console.error(`Unable to load download count for ${fileName}`, error);
+          });
+        }
+
         list.appendChild(item);
       });
 

@@ -1,0 +1,13 @@
+name = "teaching-resource-counter"
+main = "src/index.mjs"
+compatibility_date = "2026-11-22"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "teaching-resource-counter"
+database_id = "b1fea8c2-882e-47b5-9491-aa634aff53e9"
+migrations_dir = "migrations"
+
+[vars]
+SITE_ROOT = "https://imedlcd-lang.github.io/Dr-Imed-BEN-SLIMENE/"
+ALLOWED_ORIGIN = "https://imedlcd-lang.github.io"
