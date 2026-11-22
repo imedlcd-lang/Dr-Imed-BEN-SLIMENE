@@ -1266,6 +1266,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         .sort((a, b) => a.path.localeCompare(b.path, undefined, { sensitivity: "base" }));
 
       if (pdfs.length === 0) {
+        if (rootOnly) return;
         const message = document.createElement("li");
         message.className = "resource-empty";
         addBilingualText(message, "No PDF files yet.", "Aucun fichier PDF pour le moment.");
