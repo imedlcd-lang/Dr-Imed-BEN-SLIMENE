@@ -59,7 +59,8 @@ test("accepts PDFs and XLSX files across resource categories and material subsec
     "Matériels pédagogiques/Géochimie Isotopique/Isotopes.xlsx",
     "Matériels pédagogiques/Géochimie élémentaire/Constituants.xlsx",
     "Matériels pédagogiques/Digital I/Jeu_A.xlsx",
-    "Matériels pédagogiques/Hydrogéologie/Bassin.xlsx"
+    "Matériels pédagogiques/Hydrogéologie/Bassin.xlsx",
+    "Data/dataset.xlsx"
   ]) {
     const response = await worker.fetch(new Request(
       `https://counter.example/count?path=${encodeURIComponent(path)}`
