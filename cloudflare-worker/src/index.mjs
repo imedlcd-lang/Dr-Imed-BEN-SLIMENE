@@ -1,4 +1,11 @@
-const RESOURCE_FOLDERS = new Set(["Cours", "TP", "TD", "Data"]);
+const RESOURCE_FOLDERS = new Set([
+  "Cours",
+  "Data",
+  "Matériels pédagogiques",
+  "Notions de Base",
+  "TD",
+  "TP"
+]);
 
 function responseHeaders(request, env, extra = {}) {
   const headers = new Headers(extra);
@@ -56,7 +63,7 @@ export default {
 
     const path = resourcePath(url.searchParams.get("path"));
     if (!path) {
-      return jsonResponse(request, env, { error: "A valid PDF path in Cours, TP, TD or Data is required." }, 400);
+      return jsonResponse(request, env, { error: "A valid PDF path in a teaching-resource folder is required." }, 400);
     }
 
     if (url.pathname === "/count") {

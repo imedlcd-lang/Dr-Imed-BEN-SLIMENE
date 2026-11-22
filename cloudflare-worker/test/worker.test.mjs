@@ -49,6 +49,22 @@ test("counts start at zero and increment before redirecting to the PDF", async (
   assert.deepEqual(await updated.json(), { path, downloads: 1 });
 });
 
+test("accepts PDFs in the current categorized resource folders", async () => {
+  const env = createEnv();
+  for (const path of [
+    "Notions de Base/Géochimie Isotopique/Introduction.pdf",
+    "TP/Géochimie Isotopique/Exercices.pdf",
+    "Matériels pédagogiques/Hydrogéologie/Corrigés.pdf",
+    "Data/dataset.pdf"
+  ]) {
+    const response = await worker.fetch(new Request(
+      `https://counter.example/count?path=${encodeURIComponent(path)}`
+    ), env);
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { path, downloads: 0 });
+  }
+});
+
 test("rejects paths outside resource folders and blocks CORS for other origins", async () => {
   const env = createEnv();
   for (const path of ["Other/file.pdf", "Cours/../TP/file.pdf", "Data/file.txt"]) {
