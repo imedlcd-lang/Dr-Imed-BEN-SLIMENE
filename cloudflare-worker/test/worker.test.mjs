@@ -49,14 +49,17 @@ test("counts start at zero and increment before redirecting to the PDF", async (
   assert.deepEqual(await updated.json(), { path, downloads: 1 });
 });
 
-test("accepts PDFs in the current categorized resource folders", async () => {
+test("accepts PDFs and XLSX files across resource categories and material subsections", async () => {
   const env = createEnv();
   for (const path of [
     "Notions de Base/Géochimie Isotopique/Introduction.pdf",
     "TP/Géochimie Isotopique/Exercices.pdf",
     "Matériels pédagogiques/Hydrogéologie/Corrigés.pdf",
     "Data/dataset.pdf",
-    "Matériels pédagogiques/Digital I/Jeu_A.xlsx"
+    "Matériels pédagogiques/Géochimie Isotopique/Isotopes.xlsx",
+    "Matériels pédagogiques/Géochimie élémentaire/Constituants.xlsx",
+    "Matériels pédagogiques/Digital I/Jeu_A.xlsx",
+    "Matériels pédagogiques/Hydrogéologie/Bassin.xlsx"
   ]) {
     const response = await worker.fetch(new Request(
       `https://counter.example/count?path=${encodeURIComponent(path)}`
