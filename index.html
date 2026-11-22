@@ -721,6 +721,19 @@ outline-offset:2px;
 .gallery-item img{ width:100%; height:160px; object-fit:cover; display:block; transition:transform .25s ease; }
 .gallery-item:hover img{ transform:scale(1.04); }
 
+/* Teaching resources */
+#resources{ background:var(--paper); }
+.resource-intro{ max-width:760px; color:var(--muted); margin-bottom:30px; }
+.resource-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; }
+.resource-category{ background:#fff; border:1px solid rgba(13,95,117,.14); border-radius:14px; padding:24px; box-shadow:0 6px 20px rgba(7,29,43,.06); }
+.resource-category h3{ color:var(--ocean); margin:0 0 14px; }
+.resource-list{ list-style:none; padding:0; margin:0; }
+.resource-list li{ border-top:1px solid rgba(7,29,43,.09); padding:12px 0; }
+.resource-list a{ color:var(--ocean); font-weight:650; text-decoration:none; overflow-wrap:anywhere; }
+.resource-list a:hover{ color:#087d83; text-decoration:underline; }
+.resource-empty,.resource-loading{ color:var(--muted); font-size:.92rem; }
+.resource-count{ display:block; color:var(--light-muted); font-size:.82rem; margin-top:4px; }
+
 /* Lightbox */
 #lightbox{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.85); z-index:9999; }
 #lightbox img{ max-width:92%; max-height:80%; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,.6); }
@@ -749,6 +762,8 @@ outline-offset:2px;
 <a href="#profile">Profile</a>
 <a href="#research">Research</a>
 <a href="#publications">Publications</a>
+<a href="#resources" data-en>Teaching resources</a>
+<a href="#resources" data-fr>Ressources pédagogiques</a>
 <a href="#contact">Contact</a>
 <button class="lang" id="lang">FR</button>
 </div>
@@ -860,8 +875,41 @@ outline-offset:2px;
 </section>
 
 <!-- ===========================
-     GALLERY
+     TEACHING RESOURCES
 =========================== -->
+<section id="resources">
+<div class="wrap">
+<div class="eyebrow" data-en>Teaching resources</div>
+<div class="eyebrow" data-fr>Ressources pédagogiques</div>
+<h2 class="title" data-en>Courses, practicals and learning materials.</h2>
+<h2 class="title" data-fr>Cours, travaux pratiques et supports pédagogiques.</h2>
+<p class="resource-intro" data-en>Download the available PDFs. New PDF files added to one of the folders below will appear here automatically after the site is published.</p>
+<p class="resource-intro" data-fr>Téléchargez les fichiers PDF disponibles. Les nouveaux PDF ajoutés dans l’un des dossiers ci-dessous apparaîtront automatiquement ici après la publication du site.</p>
+
+<div class="resource-grid">
+  <article class="resource-category" data-resource-folder="Cours">
+    <h3>Cours</h3>
+    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
+    <ul class="resource-list"></ul>
+  </article>
+  <article class="resource-category" data-resource-folder="TP">
+    <h3>TP</h3>
+    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
+    <ul class="resource-list"></ul>
+  </article>
+  <article class="resource-category" data-resource-folder="TD">
+    <h3>TD</h3>
+    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
+    <ul class="resource-list"></ul>
+  </article>
+  <article class="resource-category" data-resource-folder="Data">
+    <h3>Data</h3>
+    <p class="resource-loading" data-en>Loading files…</p><p class="resource-loading" data-fr>Chargement des fichiers…</p>
+    <ul class="resource-list"></ul>
+  </article>
+</div>
+</div>
+</section>
 
 
 
@@ -1102,6 +1150,76 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// List PDFs directly from the four public GitHub folders.
+(function(){
+  const treeUrl = "https://api.github.com/repos/imedlcd-lang/Dr-Imed-BEN-SLIMENE/git/trees/main?recursive=1";
+  const siteRoot = "https://imedlcd-lang.github.io/Dr-Imed-BEN-SLIMENE/";
+  const cards = Array.from(document.querySelectorAll("[data-resource-folder]"));
+
+  function addBilingualText(element, english, french){
+    const en = document.createElement("span");
+    en.dataset.en = "";
+    en.textContent = english;
+    const fr = document.createElement("span");
+    fr.dataset.fr = "";
+    fr.textContent = french;
+    element.append(en, fr);
+  }
+
+  fetch(treeUrl).then(response => {
+    if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
+    return response.json();
+  }).then(result => {
+    const tree = Array.isArray(result.tree) ? result.tree : [];
+    cards.forEach(card => {
+      const folder = card.dataset.resourceFolder;
+      const list = card.querySelector(".resource-list");
+      card.querySelectorAll(".resource-loading").forEach(message => message.remove());
+      const prefix = `${folder}/`;
+      const pdfs = tree
+        .filter(file => file.type === "blob" && file.path.startsWith(prefix)
+          && !file.path.slice(prefix.length).includes("/")
+          && file.path.toLowerCase().endsWith(".pdf"))
+        .sort((a, b) => a.path.localeCompare(b.path, undefined, { sensitivity: "base" }));
+
+      if (pdfs.length === 0) {
+        const message = document.createElement("li");
+        message.className = "resource-empty";
+        addBilingualText(message, "No PDF files yet.", "Aucun fichier PDF pour le moment.");
+        list.appendChild(message);
+        return;
+      }
+
+      pdfs.forEach(file => {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = siteRoot + file.path.split("/").map(encodeURIComponent).join("/");
+        link.download = file.path.split("/").pop();
+        link.textContent = link.download.replace(/\.pdf$/i, "");
+        item.appendChild(link);
+        list.appendChild(item);
+      });
+
+      const count = document.createElement("small");
+      count.className = "resource-count";
+      addBilingualText(count, `${pdfs.length} PDF file${pdfs.length > 1 ? "s" : ""}`,
+        `${pdfs.length} fichier${pdfs.length > 1 ? "s" : ""} PDF`);
+      list.after(count);
+    });
+  }).catch(error => {
+    cards.forEach(card => {
+      card.querySelectorAll(".resource-loading").forEach(message => message.remove());
+      const list = card.querySelector(".resource-list");
+      const message = document.createElement("li");
+      message.className = "resource-empty";
+      addBilingualText(message, "Files could not be loaded. Please try again later.",
+        "Impossible de charger les fichiers. Réessayez plus tard.");
+      list.appendChild(message);
+    });
+    console.error("Unable to list teaching resources", error);
+  });
+})();
 </script>
 
 <!-- Lightbox markup -->
